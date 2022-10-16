@@ -78,7 +78,6 @@ def create_wordcloud(selected_user,df):
     return df_wc
 
 
-#week_activity_map
 #month_activity_map
 #activity_heatmap
 
@@ -131,14 +130,16 @@ def monthly_timeline(selected_user,df):
 
     return timeline
 
-def daily_timeline(selected_user,df):
-
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
+weekly_activity_map
+    return df['day_name'].value_counts()
+=======
     daily_timeline = df.groupby('only_date').count()['message'].reset_index()
 
     return daily_timeline
+
 
 
 
