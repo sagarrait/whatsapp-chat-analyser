@@ -30,6 +30,28 @@ def fetch_stats(selected_user,df):
     return num_messages,len(words),num_media_messages,len(links)
 
 # most busy users
+
+def most_common_words(selected_user,df):
+
+    f = open('stop_hinglish.txt','r')
+    stop_words = f.read()
+
+    if selected_user != 'Overall':
+        df = df[df['user'] == selected_user]
+
+    temp = df[df['user'] != 'group_notification']
+    temp = temp[temp['message'] != '<Media omitted>\n']
+
+    words = []
+
+    for message in temp['message']:
+        for word in message.lower().split():
+            if word not in stop_words:
+                words.append(word)
+
+    most_common_df = pd.DataFrame(Counter(words).most_common(20))
+    return most_common_df
+
 #create wordcloud
 #daily_timeline
 #week_activity_map
